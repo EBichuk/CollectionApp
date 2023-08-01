@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}<title> Мои коллекции </title>{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="d-grid gap-2 d-md-block pb-3 pt-3">
+            <a class="btn btn-outline-success btn-lg" href="{% url 'add_collection' %}">Добавить</a>
+            <button class="btn btn-outline-dark btn-lg">Фильтр</button>
+        </div>
+        <div class="row">
+            {% for c in col_user %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="width:400px">
+                    <img class="card-img-top" src="{{ c.img_url.url }}" alt="вау, картинка">
+                    <div class="card-body">
+                        <h5 class="card-title">{{c.name}}</h5>
+                        <p class="card-text">{{c.description}}</p>
+                        <a href="{% url 'user_collection' c.pk %}" class="link-secondary">Посмотреть</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

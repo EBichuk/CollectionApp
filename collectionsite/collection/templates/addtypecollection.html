@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}<title> Добавление </title>{% endblock %}
+
+{% block content %}
+<div class="container">
+        <div class="d-grid gap-2 d-md-block pb-3 pt-3">
+        <h2>Создать новый шаблон</h2>
+        </div>
+        <form action="{% url 'add_type_collection' i %}" method="post">
+            {% csrf_token %}
+            <table class="table table-borderless w-auto">
+                {{ form.as_table }}
+            </table>
+            <button type="submit" class="btn btn-outline-success btn">
+                Создать
+            </button>
+        </form>
+</div>
+{% endblock %}

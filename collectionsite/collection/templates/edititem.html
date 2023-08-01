@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Добавление </title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-grid gap-2 d-md-block pb-3 pt-3">
+        <h5>Редактирование</h5>
+        </div>
+        <form action="{% url 'edititem' item_id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <table class="table table-borderless w-auto">
+                    {{ form.as_table }}
+                </table>
+            <button type="submit" class="btn btn-outline-success btn-lg">
+                Изменить
+            </button>
+        </form>
+    </div>
+
+{% endblock %}

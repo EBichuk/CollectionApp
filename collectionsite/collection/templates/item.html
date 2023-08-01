@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}<title> Элемент </title>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-grid gap-2 d-md-block pt-3">
+        <a class="btn btn-outline-dark btn-lg" href="{% url 'user_collection' col_id %}" role="button">Назад</a>
+        <a class="btn btn-outline-dark btn-lg" href="{% url 'edititem' item.pk %}">Редактировать</a>
+        <a class="btn btn-outline-danger btn-lg" href="{% url 'delitem' item.pk %}">Удалить</a>
+    </div>
+    <div class="row">
+         <div class="col-md-12">
+              <h2 class="my-3">{{item.itemname}}</h2>
+         </div>
+    </div>
+    <div class="row">
+         <div class="col-md-5">
+             {% for im in imgs %}
+                <img class="img-thumbnail" src="{{ im.image.url }}">
+             {% endfor %}
+         </div>
+         <div class="col-md-7">
+             {% for i in item_feaches %}
+                <h5>{{ i.feaches.feache_name }}: {{ i.data }}</h5>
+             {% endfor %}
+             {% if item.is_public %}
+                <h5>Оценок пользователей: {{ item.like }}</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-dark btn-lg" type="submit" name="un_public" value="Снять с публикации"/>
+                </form>
+             {% else %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-dark btn-lg" type="submit" name="public" value="Опубликовать"/>
+                </form>
+             {% endif %}
+         </div>
+    </div>
+</div>
+{% endblock %}
